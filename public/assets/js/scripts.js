@@ -36,6 +36,7 @@ function index($scope, api, $filter){
 	$scope.earning = {btc:0,usd:0,aud:0}
 	$scope.ready = false;
 	api.lite('getbalance').then(function(data){ $scope.lite.wallet = data;});
+	api.lite('getworkers').then(function(data){ $scope.lite.workers = data;});
 	api.doge('getbalance').then(function(data){ $scope.doge.wallet = data;});
 	api.market().then(function(data){ $scope.market = data;$scope.calculate_earnings();});
 

@@ -63,6 +63,25 @@
 					</dl>
 				</div>
 			</div>
+	
+			<hr>
+
+			<div class="row" ng-show="lite.workers">
+				<div class="col-md-12">
+					<table class="table table-striped">
+						<thead>
+							<th>Worker Name</th><th>Status</th><th>Hash Rate</th>
+						</thead>
+						<tbody>
+							<tr ng-repeat="w in lite.workers" ng-class="{'1':'success', '0':'danger'}[w.active]">
+								<td>{{w.username}}</td>
+								<td>{{w.active}}</td>
+								<td>{{w.hashrate}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 
 		</div>
 		
