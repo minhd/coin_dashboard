@@ -71,7 +71,21 @@
 						</ul>
 					</div>
 
-					
+					<div class="panel panel-default">
+						<div class="panel-heading">Workers Status</div>
+						<table class="table table-striped">
+							<thead>
+								<th>Worker Name</th><th>Status</th><th>Hash Rate</th>
+							</thead>
+							<tbody>
+								<tr ng-repeat="w in lite.workers" ng-class="{'1':'success', '0':'danger'}[w.active]">
+									<td>{{w.username}}</td>
+									<td>{{w.active}}</td>
+									<td>{{w.hashrate}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 
 				</div>
 				<div class="col-md-6">
@@ -88,30 +102,7 @@
 							</form>
 						</div>
 					</div>
-				</div>
-			</div>
-	
-			<hr>
 
-			<div class="row">
-				<div class="col-md-6">
-					<div class="panel panel-default">
-						<div class="panel-heading">Workers Status</div>
-						<table class="table table-striped">
-							<thead>
-								<th>Worker Name</th><th>Status</th><th>Hash Rate</th>
-							</thead>
-							<tbody>
-								<tr ng-repeat="w in lite.workers" ng-class="{'1':'success', '0':'danger'}[w.active]">
-									<td>{{w.username}}</td>
-									<td>{{w.active}}</td>
-									<td>{{w.hashrate}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="col-md-6">
 					<div class="panel panel-default">
 						<div class="panel-heading">ltcrabbit Status</div>
 						<ul class="list-group">
@@ -150,6 +141,9 @@
 					</div>
 				</div>
 			</div>
+	
+			<hr>
+
 
 		</div>
 		
