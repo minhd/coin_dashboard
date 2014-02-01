@@ -15,6 +15,12 @@ class HomeController extends BaseController {
 		}else if($task==='getworkers'){
 			$data = json_decode(file_get_contents('https://www.ltcrabbit.com/index.php?page=api&action=getuserworkers&api_key=055be6c110fbd328ffc6b678159bfe600f90935e84cf5df12dc3e67cf88e18bc&id=20597'));
 			return Response::json($data->{'getuserworkers'});
+		}else if($task==='getstatus'){
+			$status = json_decode(file_get_contents('https://www.ltcrabbit.com/index.php?page=api&action=getuserstatus&api_key=055be6c110fbd328ffc6b678159bfe600f90935e84cf5df12dc3e67cf88e18bc&id=20597'));
+			$data['status'] = $status->{'getuserstatus'};
+			$status = json_decode(file_get_contents('https://www.ltcrabbit.com/index.php?page=api&action=getpoolstatus&api_key=055be6c110fbd328ffc6b678159bfe600f90935e84cf5df12dc3e67cf88e18bc&id=20597'));
+			$data['pool'] = $status->{'getpoolstatus'};
+			return Response::json($data);
 		}
 	}
 
@@ -37,7 +43,7 @@ class HomeController extends BaseController {
 		$rawData = curl_exec($curl);
 		curl_close($curl);
 		$data = json_decode($rawData);
-		
+
 		//usd_aud
 		$yqdata = json_decode(file_get_contents('http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22USDAUD%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback='), true);
 
