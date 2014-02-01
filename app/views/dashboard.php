@@ -99,7 +99,7 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							ltcrabbit Status
-							<button class="btn btn-xs btn-primary pull-right" ng-click="refresh_status()"><i class="glyphicon glyphicon-refresh"></i></button>
+							<!--button class="btn btn-xs btn-primary pull-right" ng-click="refresh_status()"><i class="glyphicon glyphicon-refresh"></i></button-->
 						</div>
 						<ul class="list-group">
 							<li class="list-group-item">
