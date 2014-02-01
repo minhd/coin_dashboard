@@ -72,7 +72,10 @@
 					</div>
 
 					<div class="panel panel-default">
-						<div class="panel-heading">Workers Status</div>
+						<div class="panel-heading">
+							Workers Status
+							<button class="btn btn-xs btn-primary pull-right" ng-click="refresh_workers()"><i class="glyphicon glyphicon-refresh"></i></button>
+						</div>
 						<table class="table table-striped">
 							<thead>
 								<th>Worker Name</th><th>Status</th><th>Hash Rate</th>
@@ -92,25 +95,15 @@
 
 				</div>
 				<div class="col-md-6">
-					<div class="panel panel-default">
-						<div class="panel-heading">Market Value</div>
-						<div class="panel-body">
-							<form class="form-horizontal" role="form">
-								<div class="form-group" ng-repeat="m in market">
-									<label for="" class="col-sm-2">{{m.id}}</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" ng-model="m.price" ng-change="calculate_earning">
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
 
 					<div class="panel panel-default">
-						<div class="panel-heading">ltcrabbit Status</div>
+						<div class="panel-heading">
+							ltcrabbit Status
+							<button class="btn btn-xs btn-primary pull-right" ng-click="refresh_status()"><i class="glyphicon glyphicon-refresh"></i></button>
+						</div>
 						<ul class="list-group">
 							<li class="list-group-item">
-								<span class="label label-success pull-right label-xl" ng-show="earning.btc">{{lite.status.status.hashrate | number:0}} kh/s</span> 
+								<span class="label label-success pull-right label-xl" ng-show="earning.btc">{{lite.status.status.hashrate | number:0}} Kh/s</span> 
 								Hashrate
 							</li>
 							<li class="list-group-item">
@@ -142,6 +135,22 @@
 							</li>
 						</ul>
 					</div>
+
+					<div class="panel panel-default">
+						<div class="panel-heading">Market Value</div>
+						<div class="panel-body">
+							<form class="form-horizontal" role="form">
+								<div class="form-group" ng-repeat="m in market">
+									<label for="" class="col-sm-2">{{m.id}}</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" ng-model="m.price" ng-change="calculate_earning">
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+					
 				</div>
 			</div>
 	

@@ -19,9 +19,19 @@ function index($scope, api, $filter){
 		$scope.earning = {btc:0,usd:0,aud:0}
 		$scope.ready = false;
 		api.lite('getbalance').then(function(data){ $scope.lite.wallet = data;});
-		api.lite('getworkers').then(function(data){ $scope.lite.workers = data;});
 		api.doge('getbalance').then(function(data){ $scope.doge.wallet = data;});
 		api.market().then(function(data){ $scope.market = data;$scope.calculate_earnings();});
+		$scope.refresh_workers();
+		$scope.refresh_status();
+	}
+
+	$scope.refresh_workers = function(){
+		$scope.lite.workers = [];
+		api.lite('getworkers').then(function(data){ $scope.lite.workers = data;});
+	}
+
+	$scope.refresh_status = function(){
+		$scope.lite.status = null;
 		api.lite('getstatus').then(function(data){ $scope.lite.status = data});
 	}
 
