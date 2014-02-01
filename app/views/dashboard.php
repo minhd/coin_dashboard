@@ -54,7 +54,7 @@
 						<div class="panel-heading">Earnings</div>
 						<ul class="list-group">
 							<li class="list-group-item">
-								<span class="label label-success pull-right label-xl" ng-show="earning.btc">{{earning.btc | number:3}}</span> 
+								<span class="label label-success pull-right label-xl" ng-show="earning.btc">{{earning.btc | currency:"BTC "}}</span> 
 								<span class="badge" ng-hide="earning.btc">loading</span> 
 								BTC
 							</li>
@@ -80,7 +80,10 @@
 							<tbody>
 								<tr ng-repeat="w in lite.workers" ng-class="{'1':'success', '0':'danger'}[w.active]">
 									<td>{{w.username}}</td>
-									<td>{{w.active}}</td>
+									<td>
+										<i class="glyphicon glyphicon-ok" ng-show="w.active=='1'"></i>
+										<i class="glyphicon glyphicon-remove" ng-show="w.active=='0'"></i>
+									</td>
 									<td>{{w.hashrate}}</td>
 								</tr>
 							</tbody>
