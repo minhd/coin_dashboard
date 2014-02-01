@@ -37,17 +37,20 @@
 						
 						<ul class="list-group">
 							<li class="list-group-item">
-								<span class="label label-success pull-right label-xl" ng-show="lite.wallet.balance">{{lite.wallet.balance | number:1}}</span> 
+								<span class="label label-success pull-right label-xl" ng-show="lite.wallet.balance">{{lite.wallet.balance | number:4}}</span> 
 								<span class="badge" ng-hide="lite.wallet.balance">loading</span> 
 								Litecoin
+								<br/>
+								<a href="http://explorer.litecoin.net/address/LcZtnwQ2RSbvhYtgY1qyxGVJVBe9t4fp8v">LcZtnwQ2RSbvhYtgY1qyxGVJVBe9t4fp8v</a>
 							</li>
 							<li class="list-group-item">
-								<span class="label label-success pull-right label-xl" ng-show="doge.wallet.balance">{{doge.wallet.balance | number:0}}</span> 
+								<span class="label label-success pull-right label-xl" ng-show="doge.wallet.balance">{{doge.wallet.balance | number}}</span> 
 								<span class="badge" ng-hide="doge.wallet.balance">loading</span> 
 								Doge
+								<br/>
+								<a href="http://dogechain.info/address/DDpYPkv1bUMXxfp57Fb8N7Ds6BVmyzhtjn">DDpYPkv1bUMXxfp57Fb8N7Ds6BVmyzhtjn</a>
 							</li>
 						</ul>
-						
 					</div>
 
 					<div class="panel panel-default">
@@ -118,19 +121,19 @@
 						<div class="panel-heading">ltcrabbit Pool Status</div>
 						<ul class="list-group">
 							<li class="list-group-item">
-								<span class="label label-success pull-right label-xl" ng-show="earning.btc">{{lite.status.pool.hashrate | number:0}} h/s</span> 
+								<span class="label label-primary pull-right label-xl" ng-show="earning.btc">{{lite.status.pool.hashrate | number:0}} h/s</span> 
 								Hashrate
 							</li>
 							<li class="list-group-item">
-								<span class="label label-success pull-right label-xl" ng-show="earning.btc">{{lite.status.pool.workers | number}}</span>
+								<span class="label label-primary pull-right label-xl" ng-show="earning.btc">{{lite.status.pool.workers | number}}</span>
 								Workers
 							</li>
 							<li class="list-group-item">
-								<span class="label label-success pull-right label-xl" ng-show="earning.btc">{{lite.status.pool.networkdiff | number}}</span>
+								<span class="label label-primary pull-right label-xl" ng-show="earning.btc">{{lite.status.pool.networkdiff | number}}</span>
 								Network Difficulty
 							</li>
 							<li class="list-group-item">
-								<span class="label label-success pull-right label-xl" ng-show="earning.btc">{{lite.status.pool.efficiency}}</span>
+								<span class="label label-primary pull-right label-xl" ng-show="earning.btc">{{lite.status.pool.efficiency}}</span>
 								Efficiency
 							</li>
 						</ul>
