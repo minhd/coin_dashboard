@@ -7,6 +7,7 @@ class Curl{
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($curl, CURLOPT_POST, false);
 		curl_setopt($curl, CURLOPT_VERBOSE, true);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 		$data = curl_exec($curl);
 		return json_decode($data);
 	}
@@ -18,6 +19,7 @@ class Curl{
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($curl, CURLOPT_POST, false);
 		curl_setopt($curl, CURLOPT_VERBOSE, true);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 		$data = curl_exec($curl);
 		return $data;
 	}
