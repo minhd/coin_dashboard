@@ -2,7 +2,6 @@
 class Curl{
 	public static function get_json($link){
 		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_SSLVERSION,3); 
 		curl_setopt($curl, CURLOPT_URL, $link);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
@@ -14,7 +13,6 @@ class Curl{
 
 	public static function get($link){
 		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_SSLVERSION,3); 
 		curl_setopt($curl, CURLOPT_URL, $link);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
