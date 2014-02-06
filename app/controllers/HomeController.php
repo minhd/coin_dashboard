@@ -3,22 +3,26 @@
 class HomeController extends BaseController {
 
 	public function dash() {
-		return View::make('dashboard');
+		if(Config::get('coins.ltc.address')===''){
+			echo 'The application needs configuration. Environment: '.App::environment();
+		}else{
+			return View::make('dashboard');
+		}
 	}
 
 	public function litecoin($task){
 		if($task==='getbalance'){
-			$data['received'] = (float) file_get_contents('http://explorer.litecoin.net/chain/Litecoin/q/getreceivedbyaddress/LcZtnwQ2RSbvhYtgY1qyxGVJVBe9t4fp8v');
-			$data['sent'] = (float) file_get_contents('http://explorer.litecoin.net/chain/Litecoin/q/getsentbyaddress/LcZtnwQ2RSbvhYtgY1qyxGVJVBe9t4fp8v');
+			$data['received'] = (float) Curl::get('http://explorer.litecoin.net/chain/Litecoin/q/getreceivedbyaddress/'.Config::get('coins.ltc.address'));
+			$data['sent'] = (float) Curl::get('http://explorer.litecoin.net/chain/Litecoin/q/getsentbyaddress/'.Config::get('coins.ltc.address'));
 			$data['balance'] = $data['received'] - $data['sent'];
 			return Response::json($data); 
 		}else if($task==='getworkers'){
-			$data = json_decode(file_get_contents('https://www.ltcrabbit.com/index.php?page=api&action=getuserworkers&api_key=055be6c110fbd328ffc6b678159bfe600f90935e84cf5df12dc3e67cf88e18bc&id=20597'));
+			$data = Curl::get_json(Config::get('coins.ltc.api_address').'&action=getuserworkers&api_key='.Config::get('coins.ltc.api_key').'&id='.Config::get('coins.ltc.api_id'));
 			return Response::json($data->{'getuserworkers'});
 		}else if($task==='getstatus'){
-			$status = json_decode(file_get_contents('https://www.ltcrabbit.com/index.php?page=api&action=getuserstatus&api_key=055be6c110fbd328ffc6b678159bfe600f90935e84cf5df12dc3e67cf88e18bc&id=20597'));
+			$status = Curl::get_json(Config::get('coins.ltc.api_address').'&action=getuserstatus&api_key='.Config::get('coins.ltc.api_key').'&id='.Config::get('coins.ltc.api_id'));
 			$data['status'] = $status->{'getuserstatus'};
-			$status = json_decode(file_get_contents('https://www.ltcrabbit.com/index.php?page=api&action=getpoolstatus&api_key=055be6c110fbd328ffc6b678159bfe600f90935e84cf5df12dc3e67cf88e18bc&id=20597'));
+			$status = Curl::get_json(Config::get('coins.ltc.api_address').'&action=getpoolstatus&api_key='.Config::get('coins.ltc.api_key').'&id='.Config::get('coins.ltc.api_id'));
 			$data['pool'] = $status->{'getpoolstatus'};
 			return Response::json($data);
 		}
@@ -26,7 +30,19 @@ class HomeController extends BaseController {
 
 	public function dogecoin($task){
 		if($task=='getbalance'){
-			$data['balance'] = (float) file_get_contents('http://dogechain.info/chain/Dogecoin/q/addressbalance/DDpYPkv1bUMXxfp57Fb8N7Ds6BVmyzhtjn');
+			$data['balance'] = (float) Curl::get('http://dogechain.info/chain/Dogecoin/q/addressbalance/'.Config::get('coins.doge.address'));
+			return Response::json($data);
+		}else if($task==='getworkers'){
+			$data = Curl::get_json(Config::get('coins.doge.api_address').'&action=getuserworkers&api_key='.Config::get('coins.doge.api_key').'&id='.Config::get('coins.doge.api_id'));
+			return Response::json($data->{'getuserworkers'}->{'data'});
+		}else if($task=='getstatus'){
+			$status = Curl::get_json(Config::get('coins.doge.api_address').'&action=getuserstatus&api_key='.Config::get('coins.doge.api_key').'&id='.Config::get('coins.doge.api_id'));
+			$data['status'] = $status->{'getuserstatus'}->{'data'};
+			$balance = Curl::get_json(Config::get('coins.doge.api_address').'&action=getuserbalance&api_key='.Config::get('coins.doge.api_key').'&id='.Config::get('coins.doge.api_id'));
+			$data['balance']['confirmed'] = $balance->{'getuserbalance'}->{'data'}->{'confirmed'};
+			$data['balance']['unconfirmed'] = $balance->{'getuserbalance'}->{'data'}->{'unconfirmed'};
+			$status = Curl::get_json(Config::get('coins.doge.api_address').'&action=getpoolstatus&api_key='.Config::get('coins.doge.api_key').'&id='.Config::get('coins.doge.api_id'));
+			$data['pool'] = $status->{'getpoolstatus'}->{'data'};
 			return Response::json($data);
 		}
 	}

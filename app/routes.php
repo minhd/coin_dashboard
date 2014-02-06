@@ -15,3 +15,6 @@ Route::get('/', 'HomeController@dash');
 Route::get('/lite/{task}', 'HomeController@litecoin');
 Route::get('/doge/{task}', 'HomeController@dogecoin');
 Route::get('/market', 'HomeController@market_rates');
+Route::get('/env', function(){
+	echo App::environment();
+});

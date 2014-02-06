@@ -4,7 +4,9 @@ function index($scope, api, $filter){
 	$scope.market = [];
 	$scope.earning = {btc:0,usd:0,aud:0}
 	$scope.ready = false;
-
+	$scope.workers = [];
+	$scope.predicate = 'hashrate';
+	$scope.reverse = true;
 	
 	$scope.$watch('[lite, doge, market]',function(newVal){
 		if($scope.market.length > 0 && $scope.lite.wallet.balance!='undefined' && $scope.doge.wallet.balance!='undefined'){
@@ -27,12 +29,30 @@ function index($scope, api, $filter){
 
 	$scope.refresh_workers = function(){
 		$scope.lite.workers = [];
-		api.lite('getworkers').then(function(data){ $scope.lite.workers = data;});
+		$scope.workers = [];
+		api.lite('getworkers').then(function(data){ 
+			$scope.lite.workers = data;
+			$.each($scope.lite.workers, function(){
+				this.mining = 'LTC';
+			});
+			$scope.workers = $scope.workers.concat($scope.lite.workers);
+		});
+		api.doge('getworkers').then(function(data){ 
+			$scope.doge.workers = data;
+			$.each($scope.doge.workers, function(){
+				this.mining = 'DOGE';
+				if(this.hashrate > 0){
+					this.active = 1;
+				}else this.active = 0;
+			});
+			$scope.workers = $scope.workers.concat($scope.doge.workers);
+		});
 	}
 
 	$scope.refresh_status = function(){
 		$scope.lite.status = null;
 		api.lite('getstatus').then(function(data){ $scope.lite.status = data});
+		api.doge('getstatus').then(function(data){ $scope.doge.status = data});
 	}
 
 	$scope.calculate_earnings = function(){

@@ -81,15 +81,20 @@
 						</div>
 						<table class="table table-striped">
 							<thead>
-								<th>Worker Name</th><th>Status</th><th>Hash Rate</th>
+								<th ng-click="predicate = 'username';reverse=!reverse">Worker Name</th>
+								<th ng-click="predicate = 'mining';reverse=!reverse">Mining</th>
+								<th ng-click="predicate = 'status';reverse=!reverse">Status</th>
+								<th ng-click="predicate = 'hashrate';reverse=!reverse">Hash Rate</th>
 							</thead>
 							<tbody>
-								<tr ng-repeat="w in lite.workers" ng-class="{'1':'success', '0':'danger'}[w.active]">
+								<tr ng-repeat="w in workers | orderBy:predicate:reverse" ng-class="{'1':'success', '0':'danger'}[w.active]">
 									<td>{{w.username}}</td>
+									<td>{{w.mining}}</td>
 									<td>
 										<i class="glyphicon glyphicon-ok" ng-show="w.active=='1'"></i>
 										<i class="glyphicon glyphicon-remove" ng-show="w.active=='0'"></i>
 									</td>
+
 									<td>{{w.hashrate}}</td>
 								</tr>
 							</tbody>
@@ -100,43 +105,36 @@
 				<div class="col-md-6">
 
 					<div class="panel panel-default">
-						<div class="panel-heading">
-							ltcrabbit Status
-							<!--button class="btn btn-xs btn-primary pull-right" ng-click="refresh_status()"><i class="glyphicon glyphicon-refresh"></i></button-->
-						</div>
-						<ul class="list-group">
-							<li class="list-group-item">
-								<span class="label label-success pull-right label-xl" ng-show="earning.btc">{{lite.status.status.hashrate | number:0}} Kh/s</span> 
-								Hashrate
-							</li>
-							<li class="list-group-item">
-								<span class="label label-success pull-right label-xl" ng-show="earning.btc">{{lite.status.status.balance}}</span>
-								Balance
-							</li>
-							<li class="list-group-item">
-								<span class="label label-success pull-right label-xl" ng-show="earning.btc">{{lite.status.status.sharerate | number:0}} share/s</span>
-								Share Rate
-							</li>
-						</ul>
-						<div class="panel-heading">ltcrabbit Pool Status</div>
-						<ul class="list-group">
-							<li class="list-group-item">
-								<span class="label label-primary pull-right label-xl" ng-show="earning.btc">{{lite.status.pool.hashrate | number:0}} h/s</span> 
-								Hashrate
-							</li>
-							<li class="list-group-item">
-								<span class="label label-primary pull-right label-xl" ng-show="earning.btc">{{lite.status.pool.workers | number}}</span>
-								Workers
-							</li>
-							<li class="list-group-item">
-								<span class="label label-primary pull-right label-xl" ng-show="earning.btc">{{lite.status.pool.networkdiff | number}}</span>
-								Network Difficulty
-							</li>
-							<li class="list-group-item">
-								<span class="label label-primary pull-right label-xl" ng-show="earning.btc">{{lite.status.pool.efficiency}}</span>
-								Efficiency
-							</li>
-						</ul>
+						<div class="panel-heading">Status</div>
+						<table class="table table-striped">
+							<thead>
+								<th></th>
+								<th>LTC</th>
+								<th>DOGE</th>
+							</thead>
+							<tbody>
+								<tr>
+									<th>Hash Rate</th>
+									<td>{{lite.status.status.hashrate | number:0}} Kh/s</td>
+									<td>{{doge.status.status.hashrate | number:0}} Kh/s</td>
+								</tr>
+								<tr>
+									<th>Balance in Pool</th>
+									<td>{{lite.status.status.balance | number:4}}</td>
+									<td>{{doge.status.balance.confirmed | number:4}} <span class="label label-default">{{doge.status.balance.unconfirmed | number:4}}</span></td>
+								</tr>
+								<tr>
+									<th>Share Rate</th>
+									<td>{{lite.status.status.sharerate | number:0}} share/s</td>
+									<td>{{doge.status.status.sharerate | number:0}} share/s</td>
+								</tr>
+								<tr>
+									<th>Pool Difficulty</th>
+									<td>{{lite.status.pool.networkdiff | number}}</td>
+									<td>{{doge.status.pool.networkdiff | number}}</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 
 					<div class="panel panel-default">
