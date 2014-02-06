@@ -34,7 +34,7 @@ function index($scope, api, $filter){
 			$scope.lite.workers = data;
 			$.each($scope.lite.workers, function(){
 				this.mining = 'LTC';
-				this.style = 'info';
+				this.style = 'success';
 				if(this.active==0) this.style='danger';
 			});
 			$scope.workers = $scope.workers.concat($scope.lite.workers);
