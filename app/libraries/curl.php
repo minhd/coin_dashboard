@@ -10,6 +10,7 @@ class Curl{
 		$data = curl_exec($curl);
 		if(!$data){
 			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($curl, CURLOPT_SSLVERSION,3);
 			$data = curl_exec($curl);
 		}
 		return json_decode($data);
@@ -25,6 +26,7 @@ class Curl{
 		$data = curl_exec($curl);
 		if(!$data){
 			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($curl, CURLOPT_SSLVERSION,3);
 			$data = curl_exec($curl);
 		}
 		return $data;
