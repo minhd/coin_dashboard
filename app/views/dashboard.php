@@ -87,7 +87,7 @@
 								<th ng-click="predicate = 'hashrate';reverse=!reverse">Hash Rate</th>
 							</thead>
 							<tbody>
-								<tr ng-repeat="w in workers | orderBy:predicate:reverse" ng-class="{'1':'success', '0':'danger'}[w.active]">
+								<tr ng-repeat="w in workers | orderBy:predicate:reverse" class="{{w.style}}">
 									<td>{{w.username}}</td>
 									<td>{{w.mining}}</td>
 									<td>
@@ -125,8 +125,8 @@
 								</tr>
 								<tr>
 									<th>Share Rate</th>
-									<td>{{lite.status.status.sharerate | number:0}} share/s</td>
-									<td>{{doge.status.status.sharerate | number:0}} share/s</td>
+									<td>{{lite.status.status.sharerate | number}} share/s</td>
+									<td>{{doge.status.status.sharerate | number}} share/s</td>
 								</tr>
 								<tr>
 									<th>Pool Difficulty</th>

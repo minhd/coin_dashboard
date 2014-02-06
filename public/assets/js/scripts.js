@@ -34,6 +34,8 @@ function index($scope, api, $filter){
 			$scope.lite.workers = data;
 			$.each($scope.lite.workers, function(){
 				this.mining = 'LTC';
+				this.style = 'info';
+				if(this.active==0) this.style='danger';
 			});
 			$scope.workers = $scope.workers.concat($scope.lite.workers);
 		});
@@ -44,6 +46,8 @@ function index($scope, api, $filter){
 				if(this.hashrate > 0){
 					this.active = 1;
 				}else this.active = 0;
+				this.style='warning';
+				if(this.active===0) this.style='danger';
 			});
 			$scope.workers = $scope.workers.concat($scope.doge.workers);
 		});
